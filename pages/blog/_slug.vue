@@ -1,10 +1,16 @@
 <template>
-$END$
+  <article>
+    <nuxt-content :document="article" />
+  </article>
 </template>
 
 <script>
 export default {
-name: "_slug"
+  async asyncData({ $content, params }) {
+    const article = await $content('articles', params.slug).fetch()
+
+    return { article }
+  }
 }
 </script>
 
